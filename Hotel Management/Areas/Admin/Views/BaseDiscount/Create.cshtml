@@ -1,0 +1,104 @@
+﻿@*@using Hotel_Management.Models
+@model IEnumerable<Setting>*@
+@model Hotel_Management.Models.BaseDiscount
+@{
+    ViewData["Title"] = "Create";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<header>
+    <div class=" form-actions row px-md-2 ">
+        <div class="col-6">
+            <h1 class="text-dark">Add New Base Discount (All Room) Discount</h1>
+        </div>
+        <div class=" bg-ligh col-6">
+            <a asp-action="Create" type="button" class="btn btn-primary float-right">Back</a>
+        </div>
+    </div>
+</header>
+<br />
+<div class="card">
+    <form asp-area="Admin" asp-controller="BaseDiscount" asp-action="Create" method="post" enctype="multipart/form-data" class="form form-horizontal">
+        <div class="form-group row px-md-2 ">
+            <div class="col-6">
+                <h3 class="text-dark pt-md-2">Add New Base Discount (All Room) Discount</h3>
+            </div>
+        </div>      
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label asp-for="Title" class="col-md-2 label-control text-left px-2" for="userinput1"></label>
+                    <div class="col-md-8">
+                        <input asp-for="Title" type="text" id="userinput1" class="form-control " name="title">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label asp-for="Discount" class="col-md-2 label-control text-left px-2" for="userinput2"></label>
+                    <div class="col-md-8">
+                        <input asp-for="Discount" type="text" id="userinput2" class="form-control " name="discount">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label asp-for="StartDate" class="col-md-2 label-control text-left px-2" for="userinput2"></label>
+                    <div class="col-md-8">
+                        <input asp-for="StartDate" type="date" id="userinput2" class="form-control " name="startdate">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label asp-for="EndDate" class="col-md-2 label-control text-left px-2" for="userinput2"></label>
+                    <div class="col-md-8">
+                        <input asp-for="EndDate" type="date" id="userinput2" class="form-control " name="enddate">
+                    </div>
+                </div>
+            </div>            
+            <div class="col-md-6">
+                <div class="form-group row">
+
+                    <label asp-for="Category" class="control-label  col-sm-2  text-left px-2"></label>
+                    <div class="col-sm-8">
+                        <select asp-for="Category" name="category" id="category" class="form-control action ">
+                            <option value="" selected>Select Category</option>
+                            <option>Hotels</option>
+                            <option>Restaurants</option>                        
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label asp-for="Status" class="control-label col-sm-2 text-left px-2"></label>
+                    <div class="col-sm-8">
+                        <select asp-for="Status" name="state" id="state" class="form-control action ">
+                            <option value="" selected>Select Status</option>
+                            <option>Active</option>
+                            <option>Inactive</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-actions left px-md-3 center">
+            <input type="submit" class="btn btn-primary" value="Save" />
+            <a asp-action="Index" class="btn btn-warning mr-1">Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+@*<script type="text/javascript">
+    $(document).ready(function event(){
+
+    });
+    $("#textfile").change(function (event) {
+        var files= event.target.files;
+        $("#imgViewr").attr("src",window.URL.createObjectURL(files[0]));
+    });
+</script>*@

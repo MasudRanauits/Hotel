@@ -1,0 +1,44 @@
+﻿
+@*@model Hotel_Management.Models.HotelService
+@{
+    ViewData["Title"] = "Create";
+}
+<br />
+<header>
+    <div class=" form-actions row px-md-2 ">
+        <div class="col-6">
+            <h1 class="text-dark">Hotel Service</h1>
+        </div>
+    </div>
+</header>
+<br />
+<form asp-area="Admin" asp-controller="HotelService" asp-action="Create" method="post" enctype="multipart/form-data" class="form ">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> Add New Service</h5>
+
+                    <div class="form-group form-actions">
+                        <label asp-for="ServiceName" class="px-2" for="exampleFormControlInput1"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="ServiceName" type="text" id="userinput1" class="form-control " name="ServiceName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PerUnitPrice" class="px-2" for="exampleFormControlInput1"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="PerUnitPrice" type="number" id="userinput1" class="form-control " name="PerUnitPrice">
+                        </div>
+                    </div>
+                    <div class="form-actions left px-md-3 center">
+                        <input type="submit" class="btn btn-primary" value="Save" />
+                        <a asp-action="Index" class="btn btn-warning mr-1">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>         
+    </div>
+</form>*@
+
+

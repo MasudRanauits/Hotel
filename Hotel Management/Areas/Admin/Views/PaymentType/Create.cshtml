@@ -1,0 +1,34 @@
+﻿@*@model Hotel_Management.Models.PaymentType
+@{
+    ViewData["Title"] = "Create";
+}
+<br />
+<header>
+    <div class=" form-actions row px-md-2 ">
+        <div class="col-6">
+            <h1 class="text-dark">Payment Types Management</h1>
+        </div>
+    </div>
+</header>
+<br />
+<form asp-area="Admin" asp-controller="PaymentType" asp-action="Create" method="post" enctype="multipart/form-data" class="form ">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Add New Guest Type</h5>
+                    <div class="form-group form-actions">
+                        <label asp-for="PaymentTypeTitle" class="px-2" for="exampleFormControlInput1"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="PaymentTypeTitle" type="text" id="PaymentTypeTitle" class="form-control " name="PaymentTypeTitle">
+                        </div>
+                    </div>
+                    <div class="form-actions left px-md-3 center">
+                        <input type="submit" class="btn btn-primary" value="Save" />
+                        <a asp-action="Index" class="btn btn-warning mr-1">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>*@

@@ -1,0 +1,585 @@
+﻿@*@using Hotel_Management.Models*@
+@using System.Net.Http
+@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin</title>
+    <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/charts/morris.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/extensions/unslider.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/weather-icons/climacons.min.css">
+    <!-- END: Vendor CSS-->
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.css">
+@*    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">*@
+    <!-- END: Theme CSS-->
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/colors/palette-gradient.css">
+    <!-- link(rel='stylesheet', type='text/css', href=app_assets_path+'/css'+rtl+'/pages/users.css')-->
+    <!-- END: Page CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <!-- END: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+   @* <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" />*@
+
+</head>
+<body class="vertical-layout vertical-menu 2-columns   fixed-navbar" data-open="click" data-menu="vertical-menu"
+      data-col="2-columns">
+    <!-- BEGIN: Header-->
+    <nav class="header-navbar navbar-expand-md navbar navbar-with-menu fixed-top navbar-semi-dark navbar-shadow">
+        <div class="navbar-wrapper">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav flex-row">
+                    <li class="nav-item mobile-menu d-md-none mr-auto">
+                        <a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#">
+                            <i class="feather icon-menu font-large-1"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand"
+                           href="../../../html/ltr/vertical-menu-template-semi-dark/index.html">
+                            <img class="brand-logo"
+                                 alt="stack admin logo" src="../../../app-assets/images/logo/stack-logo-light.png">
+                            <h2 class="brand-text">Dashboard</h2>
+                        </a>
+                    </li>
+                    <li class="nav-item d-md-none">
+                        <a class="nav-link open-navbar-container" data-toggle="collapse"
+                           data-target="#navbar-mobile"><i class="fa fa-ellipsis-v"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-container content">
+                <div class="collapse navbar-collapse" id="navbar-mobile">
+                    <ul class="nav navbar-nav mr-auto float-left">
+                        <li class="nav-item d-none d-md-block">
+                            <a class="nav-link nav-menu-main menu-toggle hidden-xs"
+                               href="#"><i class="feather icon-menu"></i></a>
+                        </li>
+                        
+                        @*<li class="nav-item d-none d-md-block">
+                            <a class="nav-link nav-link-expand" href="#">
+                                <i class="ficon feather icon-maximize"></i>
+                            </a>
+                        </li>*@
+                        @*<li class="nav-item nav-search">
+                            <a class="nav-link nav-link-search" href="#">
+                                <i class="ficon feather icon-search"></i>
+                            </a>
+                            <div class="search-input">
+                                <input class="input" type="text" placeholder="Explore Stack..." tabindex="0"
+                                       data-search="template-search">
+                                <div class="search-input-close"><i class="feather icon-x"></i></div>
+                                <ul class="search-list"></ul>
+                            </div>
+                        </li>*@
+                    </ul>
+                    <ul class="nav navbar-nav float-right">                   
+                        <li class="dropdown dropdown-notification nav-item">
+                            <a class="nav-link nav-link-label" href="#"
+                               data-toggle="dropdown">
+                                <i class="ficon feather icon-bell"></i><span class="badge badge-pill badge-danger badge-up">5</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                                <li class="dropdown-menu-header">
+                                    <h6 class="dropdown-header m-0">
+                                        <span class="grey darken-2">Notifications</span><span class="notification-tag badge badge-danger float-right m-0">5 New</span>
+                                    </h6>
+                                </li>
+                                <li class="scrollable-container media-list">
+                                    <a href="javascript:void(0)">
+                                        <div class="media">
+                                            <div class="media-left align-self-center">
+                                                <i class="feather icon-plus-square icon-bg-circle bg-cyan"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">You have new order!</h6>
+                                                <p class="notification-text font-small-3 text-muted">
+                                                    Lorem ipsum dolor
+                                                    sit amet, consectetuer elit.
+                                                </p><small>
+                                                    <time class="media-meta text-muted"
+                                                          datetime="2015-06-11T18:29:20+08:00">
+                                                        30 minutes
+                                                        ago
+                                                    </time>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </a><a href="javascript:void(0)">
+                                        <div class="media">
+                                            <div class="media-left align-self-center">
+                                                <i class="feather icon-download-cloud icon-bg-circle bg-red bg-darken-1"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading red darken-1">99% Server load</h6>
+                                                <p class="notification-text font-small-3 text-muted">
+                                                    Aliquam tincidunt
+                                                    mauris eu risus.
+                                                </p><small>
+                                                    <time class="media-meta text-muted"
+                                                          datetime="2015-06-11T18:29:20+08:00">
+                                                        Five hour
+                                                        ago
+                                                    </time>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </a><a href="javascript:void(0)">
+                                        <div class="media">
+                                            <div class="media-left align-self-center">
+                                                <i class="feather icon-alert-triangle icon-bg-circle bg-yellow bg-darken-3"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading yellow darken-3">Warning notifixation</h6>
+                                                <p class="notification-text font-small-3 text-muted">
+                                                    Vestibulum auctor
+                                                    dapibus neque.
+                                                </p><small>
+                                                    <time class="media-meta text-muted"
+                                                          datetime="2015-06-11T18:29:20+08:00">Today</time>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </a><a href="javascript:void(0)">
+                                        <div class="media">
+                                            <div class="media-left align-self-center">
+                                                <i class="feather icon-check-circle icon-bg-circle bg-cyan"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">Complete the task</h6><small>
+                                                    <time class="media-meta text-muted"
+                                                          datetime="2015-06-11T18:29:20+08:00">Last week</time>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </a><a href="javascript:void(0)">
+                                        <div class="media">
+                                            <div class="media-left align-self-center">
+                                                <i class="feather icon-file icon-bg-circle bg-teal"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">Generate monthly report</h6><small>
+                                                    <time class="media-meta text-muted"
+                                                          datetime="2015-06-11T18:29:20+08:00">Last month</time>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="dropdown-menu-footer">
+                                    <a class="dropdown-item text-muted text-center"
+                                       href="javascript:void(0)">Read all notifications</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown dropdown-notification nav-item">
+                            <a class="nav-link nav-link-label" href="#"
+                               data-toggle="dropdown">
+                                <i class="ficon feather icon-mail"></i><span class="badge badge-pill badge-warning badge-up">3</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                                <li class="dropdown-menu-header">
+                                    <h6 class="dropdown-header m-0">
+                                        <span class="grey darken-2">Messages</span><span class="notification-tag badge badge-warning float-right m-0">4 New</span>
+                                    </h6>
+                                </li>
+                                <li class="scrollable-container media-list">
+                                    <a href="javascript:void(0)">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <div class="avatar avatar-online avatar-sm rounded-circle">
+                                                    <img src="../../../app-assets/images/portrait/small/avatar-s-1.png"
+                                                         alt="avatar"><i></i>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">Margaret Govan</h6>
+                                                <p class="notification-text font-small-3 text-muted">
+                                                    I like your
+                                                    portfolio, let's start.
+                                                </p><small>
+                                                    <time class="media-meta text-muted"
+                                                          datetime="2015-06-11T18:29:20+08:00">Today</time>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </a><a href="javascript:void(0)">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <span class="avatar avatar-sm avatar-busy rounded-circle">
+                                                    <img src="../../../app-assets/images/portrait/small/avatar-s-2.png"
+                                                         alt="avatar"><i></i>
+                                                </span>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">Bret Lezama</h6>
+                                                <p class="notification-text font-small-3 text-muted">
+                                                    I have seen your
+                                                    work, there is
+                                                </p><small>
+                                                    <time class="media-meta text-muted"
+                                                          datetime="2015-06-11T18:29:20+08:00">Tuesday</time>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </a><a href="javascript:void(0)">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <div class="avatar avatar-online avatar-sm rounded-circle">
+                                                    <img src="../../../app-assets/images/portrait/small/avatar-s-3.png"
+                                                         alt="avatar"><i></i>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">Carie Berra</h6>
+                                                <p class="notification-text font-small-3 text-muted">
+                                                    Can we have call in
+                                                    this week ?
+                                                </p><small>
+                                                    <time class="media-meta text-muted"
+                                                          datetime="2015-06-11T18:29:20+08:00">Friday</time>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </a><a href="javascript:void(0)">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <span class="avatar avatar-sm avatar-away rounded-circle">
+                                                    <img src="../../../app-assets/images/portrait/small/avatar-s-6.png"
+                                                         alt="avatar"><i></i>
+                                                </span>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">Eric Alsobrook</h6>
+                                                <p class="notification-text font-small-3 text-muted">
+                                                    We have project
+                                                    party this saturday.
+                                                </p><small>
+                                                    <time class="media-meta text-muted"
+                                                          datetime="2015-06-11T18:29:20+08:00">last month</time>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="dropdown-menu-footer">
+                                    <a class="dropdown-item text-muted text-center"
+                                       href="javascript:void(0)">Read all messages</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown dropdown-user nav-item">
+                            <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                                <div class="avatar avatar-online">
+                                    <img src="../../../app-assets/images/portrait/small/avatar-s-1.png"
+                                         alt="avatar"><i></i>
+                                </div><span class="user-name">John Doe</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item"
+                                   href="user-profile.html"><i class="feather icon-user"></i> Edit Profile</a><a class="dropdown-item" href="app-email.html">
+                                    <i class="feather icon-mail"></i> My
+                                    Inbox
+                                </a><a class="dropdown-item" href="user-cards.html">
+                                    <i class="feather icon-check-square"></i> Task
+                                </a><a class="dropdown-item"
+                                       href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a>
+                                <div class="dropdown-divider"></div><a class="dropdown-item"
+                                                                       href="login-with-bg-image.html"><i class="feather icon-power"></i> Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- END: Header-->
+    <!-- BEGIN: Main Menu-->
+    <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
+        <div class="main-menu-content">
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                @*<li class=" navigation-header">
+                    <span>General</span><i class=" feather icon-minus" data-toggle="tooltip"
+                                           data-placement="right" data-original-title="General"></i>
+                </li>*@
+                @*<li class=" nav-item">
+                    <a href="app-email.html">
+                        <i class="feather icon-home"></i><span class="menu-title" data-i18n="Home">Home</span>
+
+                    </a>
+                </li>*@
+@*                <li class=" nav-item">
+
+                    <a href="index.html">
+
+                        <i class="feather icon-home"></i><span class="menu-title" data-i18n="System">System</span><span class="badge badge badge-primary badge-pill float-right mr-2">3</span>
+                                                               
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="dashboard-ecommerce.html" data-i18n="eCommerce">eCommerce</a>
+                        </li>
+                        <li class="active">
+                            <a class="menu-item" href="dashboard-analytics.html"
+                               data-i18n="Analytics">Analytics</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="dashboard-fitness.html" data-i18n="Fitness">Fitness</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="dashboard-crm.html" data-i18n="CRM">CRM</a>
+                        </li>
+                    </ul>
+                </li>*@
+
+                @*<li class=" nav-item">
+
+                    <a href="index.html">
+
+                        <i class="feather icon-home"></i><span class="menu-title" data-i18n="Configurations">Configurations</span><span class="badge badge badge-primary badge-pill float-right mr-2">3</span>
+
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="dashboard-ecommerce.html" data-i18n="BaseDiscount">Base Discount</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="dashboard-fitness.html" data-i18n="OtherService">OtherService</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="dashboard-crm.html" data-i18n="GuestTypes">Guest Types</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="dashboard-crm.html" data-i18n="PaymentTypes">PaymentTypes</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="dashboard-crm.html" data-i18n="GuestTypesDiscount">Guest Types Discount</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="dashboard-crm.html" data-i18n="PaymentDiscount">Payment Discount</a>
+                        </li>
+                    </ul>
+                </li>*@
+                <li class=" nav-item">
+                    <a href="#">
+                        <span class="menu-title" data-i18n="Configurations">Configurations</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item"  asp-area="Admin" asp-controller="BaseDiscount" asp-action="Create">Base Discount</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" asp-area="Admin" asp-controller="HotelService" asp-action="Index" >Other Service</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" asp-area="Admin" asp-controller="GuestType" asp-action="Index">Guest Types</a>
+                        </li>
+                        <li>
+                            <a class="menu-item"asp-area="Admin" asp-controller="PaymentType" asp-action="Index">Payment Types</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" asp-area="Admin" asp-controller="GuestTypeDiscount" asp-action="Index">Guest Types Discount</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" asp-area="Admin" asp-controller="PaymentDiscount" asp-action="Index">Payment Discount</a>
+                        </li>
+                    </ul>
+                </li>     
+               
+                @*<li class=" navigation-header">
+                    <span>Apps</span><i class=" feather icon-minus" data-toggle="tooltip"
+                                        data-placement="right" data-original-title="Apps"></i>
+                </li>*@
+                <li class=" nav-item">
+                    <a class="menu-item" asp-area="Admin" asp-controller="AddHotel" asp-action="Create">Add Hotel</a>
+                </li>
+                <li class=" nav-item">
+                    <a class="menu-item" asp-area="Admin" asp-controller="Settings" asp-action="Index">Settings</a>
+                </li>
+
+             @*   <li class=" nav-item">                  
+                        <a class="feather icon-message-square"></a><span class="menu-title" data-i18n="Setings">Setings</span>          
+                </li>*@
+
+                
+                @*<li class=" nav-item" >
+                    <a class="feather icon-message-square menu-title" asp-area="Admin" asp-controller="AddHotel" asp-action="Index">Privacy</a>
+                </li>*@
+
+                @*<li class=" nav-item" >
+                <a class="nav-link text-dark" asp-area="Admin" asp-controller="AddHotel" asp-action="Index">Privacy</a>
+                </li>*@
+
+               @* <li class=" nav-item">
+                    <a href="app-todo.html">
+                        <i class="feather icon-check-square"></i><span class="menu-title" data-i18n="Todo Application">Todo Application</span>
+                    </a>
+                </li>*@
+                @*<li class=" nav-item">
+                    <a href="app-kanban.html">
+                        <i class="feather icon-file-plus"></i><span class="menu-title" data-i18n="Kanban Application">Kanban Application</span>
+                    </a>
+                </li>*@
+                @*<li class=" nav-item">
+                    <a href="app-contacts.html">
+                        <i class="feather icon-users"></i><span class="menu-title" data-i18n="Contacts">Contacts</span>
+                    </a>
+                </li>*@
+                @*<li class=" nav-item">
+                    <a href="project-summary.html">
+                        <i class="feather icon-airplay"></i><span class="menu-title" data-i18n="Project Summary">Project Summary</span>
+                    </a>
+                </li>*@
+
+                @*<li class=" navigation-header">
+                    <span>Pages</span><i class=" feather icon-minus" data-toggle="tooltip"
+                                         data-placement="right" data-original-title="Pages"></i>
+                </li>
+
+                <li class=" nav-item">
+                    <a href="account-setting.html">
+                        <i class="feather icon-user-plus"></i><span class="menu-title" data-i18n="Account setting">Account setting</span>
+                    </a>
+                </li>
+                <li class=" nav-item">
+                    <a href="#">
+                        <i class="feather icon-unlock"></i><span class="menu-title"data-i18n="Authentication">Authentication</span>
+                                                                 
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="login-simple.html" data-i18n="Login Simple">Login Simple</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="login-with-bg.html" data-i18n="Login with Bg">Login with Bg</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="login-with-bg-image.html" data-i18n="Login with Bg Image">
+                                Login
+                                with Bg Image
+                            </a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="register-simple.html" data-i18n="Register Simple">
+                                Register
+                                Simple
+                            </a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="register-with-bg.html" data-i18n="Register with Bg">
+                                Register with
+                                Bg
+                            </a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="register-with-bg-image.html"
+                               data-i18n="Register with Bg Image">Register with Bg Image</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="unlock-user.html" data-i18n="Unlock User">Unlock User</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="recover-password.html" data-i18n="Recover Password">
+                                Recover
+                                Password
+                            </a>
+                        </li>
+                    </ul>
+                </li>*@
+@*                <li class=" nav-item">
+                    <a href="#">
+                        <i class="feather icon-alert-triangle"></i><span class="menu-title"data-i18n="Error">Error</span>                                                                        
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="error-400.html" data-i18n="Error 400">Error 400</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="error-401.html" data-i18n="Error 401">Error 401</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="error-403.html" data-i18n="Error 403">Error 403</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="error-404.html" data-i18n="Error 404">Error 404</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="error-500.html" data-i18n="Error 500">Error 500</a>
+                        </li>
+                    </ul>
+                </li>*@               
+            </ul>
+        </div>
+    </div>
+    <!-- END: Main Menu-->
+
+    <div class="app-content content">           
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    @*<header>
+
+    </header>*@
+
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - Hotel - <a asp-area="" asp-page="/PIXINVENT">PIXINVENT</a>
+        </div>
+    </footer>
+
+    <script src="~/app-assets/js/core/libraries/jquery.min.js"></script>
+    <!-- END: Footer-->
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="../../../app-assets/vendors/js/extensions/jquery.knob.min.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/knob.js"></script>
+    <script src="../../../app-assets/vendors/js/charts/raphael-min.js"></script>
+    <script src="../../../app-assets/vendors/js/charts/morris.min.js"></script>
+    <script src="../../../app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="../../../app-assets/vendors/js/charts/jvector/jquery-jvectormap-world-mill.js"></script>
+    <script src="../../../app-assets/data/jvector/visitor-data.js"></script>
+    <script src="../../../app-assets/vendors/js/charts/chart.min.js"></script>
+    <script src="../../../app-assets/vendors/js/charts/jquery.sparkline.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/unslider-min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/colors/palette-climacon.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/fonts/simple-line-icons/style.min.css">
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Theme JS-->
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <!-- END: Theme JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="../../../app-assets/js/scripts/pages/dashboard-analytics.js"></script>
+    <!-- END: Page JS-->
+   @* <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>   
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>*@
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     @*<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>*@
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

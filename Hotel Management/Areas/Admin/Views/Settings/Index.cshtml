@@ -1,0 +1,123 @@
+﻿@*@using Hotel_Management.Models
+@model IEnumerable<Setting>*@
+@model Hotel_Management.Models.Setting
+@{
+    ViewData["Title"] = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<header>
+    <div class=" form-actions row px-md-2 ">
+        <div class="col-6">
+            <h1 class="text-dark">System Settings</h1>
+        </div>
+    </div>
+
+</header>
+<br />
+<div class="card">
+    <form asp-action="Index" method="post" enctype="multipart/form-data" class="form form-horizontal">
+        <div class="form-group row px-md-2 ">
+            <div class="col-6">
+                <h3 class="text-dark pt-md-2">System Settings</h3>
+            </div>
+        </div>
+        <div class="form-group row form-actions">
+            <label asp-for="AppName " for="fname" class="control-label col-sm-2 px-5"></label>
+            <div class="col-sm-6">
+                <input asp-for="AppName " type="text" class="form-control" id="fname">
+            </div>
+        </div>
+    <div class="form-group row">
+            <label asp-for="AppTitle " for="fname" class="control-label col-sm-2 px-5"></label>
+        <div class="col-sm-6">
+                <input asp-for="AppTitle " type="text" class="form-control" id="fname">
+        </div>
+    </div>
+    <div class="form-group row">
+            <label asp-for="AppURL " for="fname" class="control-label col-sm-2 px-5"></label>
+        <div class="col-sm-6">
+                <input asp-for ="AppURL " type="url" class="form-control" id="fname">
+        </div>
+    </div>
+    <div class="form-group row">
+            <label asp-for="Email " for="fname" class="control-label col-sm-2 px-5"></label>
+        <div class="col-sm-6">
+                <input asp-for="Email " type="email" class="form-control" id="fname">
+        </div>
+    </div>
+    <div class="form-group row">
+            <label asp-for="AppAddress " class="control-label col-sm-2 px-5" for="userinput8"></label>
+        <div class="col-sm-6">
+                <textarea asp-for="AppAddress " id="userinput8" rows="4" class="form-control " name="address"></textarea>
+        </div>
+    </div>
+    <div class="form-group row">
+            <label asp-for="Contact " for="fname" class="control-label col-sm-2 px-5"></label>
+        <div class="col-sm-6">
+                <input asp-for="Contact " type="text" class="form-control" id="fname">
+        </div>
+    </div>
+    <div class="form-group row">
+            <label asp-for="CurrencySymbol " for="fname" class="control-label col-sm-2 px-5"></label>
+        <div class="col-sm-6">
+             <select asp-for="CurrencySymbol " name="state" id="state" class="form-control action ">
+                <option value="" selected>Select Currency</option>
+                <option>BDT</option>
+                <option>USD</option>
+                <option>EUR</option>
+                <option>PKR</option>
+                <option>INR</option>
+             </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="CurrencyOrder "for="fname" class="control-label col-sm-2 px-5"></label>
+        <div class="col-sm-6">
+                <select asp-for="CurrencyOrder " name="state" id="state" class="form-control action">
+                <option value="" selected>Select Currency Order</option>
+                <option>hfjh</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+            <label asp-for="DateFormat " for="fname" class="control-label col-sm-2 px-5"></label>
+        <div class="col-sm-6">
+                <input asp-for="DateFormat " type="date" class="form-control" id="fname">
+        </div>
+    </div>
+
+    <div class="form-group row">
+            <label asp-for="USDRate " for="fname" class="control-label col-sm-2 px-5"></label>
+        <div class="col-sm-6">
+                <input asp-for="USDRate " type="text" class="form-control" id="fname">
+        </div>
+    </div>
+        <div class="form-group row">
+            <label asp-for="AppLogo " for="fname" class="control-label col-sm-2 px-5"></label>
+            <div class="col-md-10">
+                <div class="col-9 col-xl-10">
+                    <input asp-for="AppLogo " type="file" name="ifile" id="textfile" value="Upload File" style="width:50%">
+                    @*<div class="col-md-10">
+                        <img id="imgViewr" width="150" height="150" style="border:1px solid #000000;" />
+                    </div>*@
+                </div>
+            </div>
+        </div>
+        <div class="form-actions left px-md-3">
+            <input type="submit" class="btn btn-primary" value="Save" />
+            <a asp-action="Index" class="btn btn-warning mr-1">Update</a>
+        </div>
+
+</form>
+</div>
+
+@*<script type="text/javascript">
+    $(document).ready(function event(){
+
+    });
+    $("#textfile").change(function (event) {
+        var files= event.target.files;
+        $("#imgViewr").attr("src",window.URL.createObjectURL(files[0]));
+    });
+</script>*@

@@ -1,0 +1,121 @@
+﻿@using Hotel_Management.Models
+@model IEnumerable<AddHotels>
+@{
+    ViewData["Title"] = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br /><br />
+<header>
+    <div class="row px-md-2">
+        <div class="col-6">
+            <h1 class="text-dark">Hotel List</h1>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-action="Create" class="btn bg-info ">&nbsp;Add New Hotel</a>
+        </div>
+    </div>
+</header>
+
+<br /><br />
+<body>
+<div class="card-content collapse show ">
+                    <div class="card-body">                       
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered datatable-select-inputs" id="myTable">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model =>model.HotelName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model =>model.Address)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model =>model.Location)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model =>model.ContactNo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model =>model.FaxNumber)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model =>model.Phone)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model =>model.VatRegNo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model =>model.EmailAddress)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model =>model.AreaCode)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model =>model.RestaurantName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model =>model.Capacity)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model =>model.SSLStoreId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model =>model.SSLPassword)
+                                        </th>
+                                        
+                                        <th>
+                                            Action
+                                        </th>
+                                        <th>
+
+                                        </th>
+                                    </tr>
+                                </thead>                                
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.HotelName</td>
+                                            <td>@item.Address</td>
+                                            <td>@item.Location</td>
+                                            <td>@item.ContactNo</td>
+                                            <td>@item.FaxNumber</td>
+                                            <td>@item.Phone</td>
+                                            <td>@item.VatRegNo</td>
+                                            <td>@item.EmailAddress</td>
+                                            <td>@item.AreaCode</td>
+                                            <td>@item.RestaurantName</td>
+                                            <td>@item.Capacity</td>
+                                            <td>@item.SSLStoreId</td>
+                                             <td>@item.SSLPassword</td>
+                                            <td>
+                                                <partial name="_ButtonPartial" model="@item.Id" />
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                                <tfoot>
+                                    @*<tr>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                        <th>Office</th>
+                                        <th>Age</th>
+                                        <th>Start date</th>
+                                        <th>Salary</th>
+                                    </tr>*@
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+  </div>
+</body>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}

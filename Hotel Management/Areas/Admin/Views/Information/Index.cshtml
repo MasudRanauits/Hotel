@@ -1,0 +1,119 @@
+﻿@model Hotel_Management.Models.Information
+@{
+    ViewData["Title"] = "Index";
+}
+<section class="content">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mt-1 mb-1">
+                <div class="col-sm-6 d-flex">
+                    <h1 class="m-0 text-dark">Branchs</h1>                  
+                    <a class="btn btn-success ml-1" href="@Url.RouteUrl("information-create")">Add Branch</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 mb-4">
+                <div class="card text-left">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="display table table-striped table-bordered datable" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th width="30">SL</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Country</th>
+                                        <th width="140">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+
+        var table = $('.datable').DataTable({
+            language: {
+                "lengthMenu": "Display _MENU_ Records",
+                'paginate': {
+                    'previous': '<span> <i class="fa fa-arrow-circle-left" style=" font-size: 18px; " aria-hidden="true"></i></span>',
+                    'next': '<span><i class="fa fa-arrow-circle-right" style=" font-size: 18px; " aria-hidden="true"></i></span>',
+                },
+            },
+            'bStateSave': false,
+            "lengthMenu": [[10, 20, 50, 100, 300, 500], [10, 20, 50, 100, 300, 500]],
+            'paging': true,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+            'bStateSave': false,
+            'saveState': false,
+            "serverSide": true,
+            "Processing": true,
+            "sAjaxSource": "@Url.RouteUrl("branchs")",
+            "fnServerData": function (sSource, aoData, fnCallback) {
+                $.ajax({
+                    type: "POST",
+                    data: aoData,
+                    url: sSource,
+                    success: fnCallback
+                });
+            },
+            columns: [
+                { "data": "SL", "autoWidth": true },
+                { "data": "Name", "autoWidth": true },
+                { "data": "Address", "autoWidth": true },
+                { "data": "Country", "autoWidth": true },
+                {
+                    "data": "Id", width: 155, "render": function (data, type, row, col) {
+                        var btn = '';
+                        if (editpermisssion == 'True' && row.IsActive != isActive) {
+                            var edit = '@Url.RouteUrl("information-edit", new { id = "-1" })';
+                            edit = edit.replace("-1", data);
+                            btn += '<a href="' + edit + '" title="Edit" class="btn btn-primary ml-1 btn-sm"><i class="text-20 feather icon-edit"></i></a> ';
+                        }
+                        if (deletepermisssion == 'True' && row.IsActive != isActive) {
+                            var deleteurl = '@Url.RouteUrl("information-delete", new { id = "-1" })';
+                            deleteurl = deleteurl.replace("-1", data);
+                            btn += '<button type="button" onclick="Delete(\'' + deleteurl + '\')" title="Delete" class="btn btn-danger ml-1 btn-sm"><i class="text-20 feather icon-trash-2"></i></button>';
+                        }
+                        return btn;
+                    }
+                }
+            ],
+            "rowCallback": function (row, data, iDisplayIndex) {
+                $("td:first", row).html(this.fnSettings()._iDisplayStart + iDisplayIndex + 1);
+                if (data.IsActive == isActive) {
+                    $('td', row).css('background-color', '#F08080');
+                    $('td', row).css('color', '#ffffff');
+                }
+            },
+            "infoCallback": function (settings, start, end, max, total, pre) {
+                var api = this.api();
+                var pageInfo = api.page.info();
+                var htmlView = '<strong>Total Records: ' + total + '</strong>'
+                return htmlView;
+            },
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api(), data;
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                };
+            },
+        });
+    </script>
+}

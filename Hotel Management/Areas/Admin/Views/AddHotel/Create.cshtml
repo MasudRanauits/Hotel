@@ -1,0 +1,261 @@
+﻿@model Hotel_Management.Models.AddHotels
+@{
+    ViewData["Title"] = "Create";
+}
+<header>
+    <div class="bs-example">
+        <div class="bg-ligh">
+            <a asp-action="Index" type="button" class="btn btn-primary float-right">Back</a>
+        </div>
+    </div>
+</header>
+<body>
+    <form asp-action="Create" method="post" enctype="multipart/form-data" class="form form-horizontal">
+        <div class="form-body">
+            <h2 class="form-section text-dark px-md-2"> Add New Hotel</h2>
+            <div class="form-group row">
+                @*<label  class="col-md-1 label-control" for="timesheetinput1">Hotel Name<span class="text-danger">*</span></label>*@
+                <label asp-for="HotelName " class="col-md-1 label-control" for="userinput1"></label>
+                <div class="col-md-10">
+                    <input asp-for="HotelName" type="text" id="userinput1" class="form-control " name="hotelname">
+                </div>
+            </div>
+            <div class="row">               
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label asp-for="Address" class="col-md-2 label-control" for="userinput1"></label>
+                            <div class="col-md-8">
+                                <input asp-for="Address"  type="text" id="userinput1" class="form-control " name="address">
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+
+                        <label asp-for="Location" class="control-label col-sm-2 px-5"></label>
+                        <div class="col-sm-8">
+                            <select  name="state" id="state" class="form-control action ">
+                                <option value="" selected>Select Location</option>
+                                <option>Dhaka</option>
+                                <option>Gazipur</option>
+                                <option>Tangail</option>
+                                <option>Gopalganj</option>
+                                <option>Kishoreganj</option>
+                                <option>Madaripur</option>
+                                <option>Manikganj</option>
+                                <option>Munshiganj</option>
+                                <option>Narayanganj</option>
+                                <option>Narsingdi</option>
+                                <option>Rajbari</option>
+
+                                <option>Sylhet</option>
+                                <option>Habiganj</option>
+                                <option>Moulvibazar</option>
+                                <option>Sunamganj</option>
+                                
+                                <option>Chittagong</option>
+                                <option>Bandarban</option>
+                                <option>Brahmanbaria</option>
+                                <option>Chandpur</option>
+                                <option>Comilla</option>
+                                <option>Cox's Bazar</option>
+                                <option>Feni</option>
+                                <option>Khagrachhari</option>
+                            </select>
+                        </div>                       
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label asp-for="ContactNo" class="col-md-2 label-control" for="userinput2"></label>
+                        <div class="col-md-8">
+                            <input asp-for="ContactNo" type="text" id="userinput2" class="form-control " name="contactno">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label asp-for="FaxNumber" class="col-md-2 label-control" for="userinput2"></label>
+                        <div class="col-md-8">
+                            <input asp-for="FaxNumber" type="text" id="userinput2" class="form-control " name="faxnumber">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label asp-for="Phone" class="col-md-2 label-control" for="userinput2"></label>
+                        <div class="col-md-8">
+                            <input asp-for="Phone" type="text" id="userinput2" class="form-control " name="number">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label asp-for="VatRegNo" class="col-md-2 label-control" for="userinput2"></label>
+                        <div class="col-md-8">
+                            <input asp-for="VatRegNo" type="text" id="userinput2" class="form-control " name="vat-reg-no">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label asp-for="EmailAddress" class="col-md-2 label-control" for="userinput2"></label>
+                        <div class="col-md-8">
+                            <input asp-for="EmailAddress" type="text" id="userinput2" class="form-control " name="emailaddress">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label asp-for="AreaCode" class="col-md-2 label-control" for="userinput2">Area Code</label>
+                        <div class="col-md-8">
+                            <input asp-for="AreaCode" type="text" id="userinput2" class="form-control " name="areacode">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label asp-for="RestaurantName"  class="col-md-2 label-control" for="userinput2"></label>
+                        <div class="col-md-8">
+                            <input asp-for="RestaurantName" type="text" id="userinput2" class="form-control " name="restaurantname">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label asp-for="Capacity" class="col-md-2 label-control" for="userinput2"></label>
+                        <div class="col-md-8">
+                            <input asp-for="Capacity" type="text" id="userinput2" class="form-control " name="capacity">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label asp-for="SSLStoreId" class="col-md-2 label-control" for="userinput2"></label>
+                        <div class="col-md-8">
+                            <input asp-for="SSLStoreId" type="text" id="userinput2" class="form-control " name="sslstoreid">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label asp-for="SSLPassword" class="col-md-2 label-control" for="userinput2"></label>
+                        <div class="col-md-8">
+                            <input asp-for="SSLPassword" type="text" id="userinput2" class="form-control " name="sslpassword">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label asp-for="Description" class="col-md-1 label-control" for="userinput8"></label>
+                        <div class="col-md-10">
+                            <textarea asp-for="Description" id="userinput8" rows="6" class="form-control " name="description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label  class="col-md-1 label-control px-md-5" for="userinput2">Facality</label>
+                <div class="col-md-2 col-sm-1">
+                    <fieldset>
+                        <input type="checkbox" id="input-5">
+                        <label for="input-5">Free Wifi</label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox" id="input-6">
+                        <label for="input-6">Room Service</label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox" id="input-7">
+                        <label for="input-7">Local guide </label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox" id="input-8">
+                        <label for="input-8">Intercom</label>
+                    </fieldset>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <fieldset>
+                        <input type="checkbox" id="input-5">
+                        <label for="input-5">Resturent</label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox" id="input-6">
+                        <label for="input-6">Tea & Coffee</label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox" id="input-7">
+                        <label for="input-7">24/hr Support </label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox" id="input-8">
+                        <label for="input-8">Complementary Breakfast</label>
+                    </fieldset>
+                </div>
+                <div class="col-md-2 col-sm-1">
+                    <fieldset>
+                        <input type="checkbox" id="input-5">
+                        <label for="input-5">Gym</label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox" id="input-6">
+                        <label for="input-6">Transport</label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox" id="input-7">
+                        <label for="input-7">Hot Water </label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox" id="input-8">
+                        <label for="input-8">Mineral water</label>
+                    </fieldset>
+                </div>
+                <div class="col-md-2 col-sm-1">
+                    <fieldset>
+                        <input type="checkbox" id="input-5">
+                        <label for="input-5">Swimming pool</label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox" id="input-6">
+                        <label for="input-6">Free toiletries</label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox" id="input-7">
+                        <label for="input-7">Air Coddition </label>
+                    </fieldset>
+                    <fieldset>
+                        <input type="checkbox" id="input-8">
+                        <label for="input-8">Television</label>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-md-2 label-control" for="userinput1"></label>
+                        <div class="custom-control-inline custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="customSwitch10">
+                            <label class="custom-control-label" for="customSwitch10">Hall Available</label>
+                        </div>
+                        <div class="custom-control-inline custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="customSwitch2">
+                            <label class="custom-control-label" for="customSwitch2">Resturent Available</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-actions center">
+            <input type="submit" class="btn btn-primary" value="Save" />
+            <a asp-action="Index" class="btn btn-warning mr-1">Cancel</a>
+        </div>
+    </form>
+    
+</body>

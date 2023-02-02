@@ -1,0 +1,41 @@
+﻿@model Hotel_Management.Models.Information
+@{
+    ViewData["Title"] = "Create";
+}
+<section class="content">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mt-1 mb-1">
+                <div class="col-sm-6 d-flex">
+                    <h1 class="m-0 text-dark">Information From</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-5">
+                    <div class="card-body">
+                        @using (Html.BeginRouteForm("information-create", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.Partial("_Partialform", Model)
+
+                            <div class="form-group row col">
+                                <div class="col-2"></div>
+                                <div class="col-10">
+                                    <button class="btn btn-success" type="submit">Submit</button>
+                                    <button class="btn btn-danger" >Back</button>                                 
+                                        <a href="@Url.RouteUrl("information")" class="btn btn-primary">Back To List</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
